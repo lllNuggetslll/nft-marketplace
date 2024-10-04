@@ -2,10 +2,10 @@
 
 import { Web3Provider } from "@ethersproject/providers";
 import styled from "styled-components";
-import { useState } from "react";
+import { useWallet } from "../context/WalletContext";
 
 const WalletButton = () => {
-  const [account, setAccount] = useState<string | null>(null);
+  const { account, setAccount } = useWallet();
 
   const connectWallet = async () => {
     if (window.ethereum) {
@@ -23,11 +23,7 @@ const WalletButton = () => {
 
   return (
     <Button onClick={connectWallet}>
-      {account
-        ? `${account.substring(0, 6)}...${account.substring(
-            account.length - 4
-          )}`
-        : "Connect Wallet"}
+      {account ? `Connected` : "Connect Wallet"}
     </Button>
   );
 };
