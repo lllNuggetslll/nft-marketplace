@@ -8,6 +8,12 @@ export interface NFT {
       tokenType: string;
     };
   };
+  title: string;
+  media: [
+    {
+      gateway: string;
+    }
+  ];
   metadata: {
     name: string;
     description: string;
