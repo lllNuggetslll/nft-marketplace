@@ -15,7 +15,6 @@ export default function Home() {
   const { account } = useWallet();
 
   useEffect(() => {
-    console.log(process.env.DEFAULT_WALLET_ID);
     const loadNFTs = async () => {
       try {
         const fetchedNFTs = await fetchNFTs(
