@@ -3,20 +3,32 @@ import styled from "styled-components";
 
 interface NFTProps {
   nft: {
-    id: string;
+    contract: {
+      address: string;
+    };
+    id: {
+      tokenId: string;
+    };
     title: string;
-    imageUrl: string;
-    owner: string;
+    media: [
+      {
+        gateway: string;
+      }
+    ];
   };
 }
 
 const NFTCard = ({ nft }: NFTProps) => {
+  const tokenIdDecimal = BigInt(nft.id.tokenId).toString();
+
   return (
-    <Link href={`/nft/${nft.id}`} passHref>
+    <Link href={`/nft/${nft.contract.address}/${tokenIdDecimal}`} passHref>
       <Card>
-        <Image src={nft.imageUrl} alt={nft.title} />
+        <Image
+          src={nft.media[0]?.gateway || "/fallback-image.png"}
+          alt={nft.title}
+        />
         <Title>{nft.title}</Title>
-        <Owner>Owned by {nft.owner}</Owner>
       </Card>
     </Link>
   );
@@ -45,11 +57,6 @@ const Image = styled.img`
 const Title = styled.h2`
   margin: 1rem 0;
   font-size: 1.25rem;
-`;
-
-const Owner = styled.p`
-  color: #555;
-  font-size: 0.9rem;
 `;
 
 export default NFTCard;
