@@ -1,22 +1,6 @@
 import Link from "next/link";
+import { NFTProps } from "./../types/nftTypes";
 import styled from "styled-components";
-
-interface NFTProps {
-  nft: {
-    contract: {
-      address: string;
-    };
-    id: {
-      tokenId: string;
-    };
-    title: string;
-    media: [
-      {
-        gateway: string;
-      }
-    ];
-  };
-}
 
 const NFTCard = ({ nft }: NFTProps) => {
   const tokenIdDecimal = BigInt(nft.id.tokenId).toString();
