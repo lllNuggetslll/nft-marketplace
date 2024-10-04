@@ -17,7 +17,7 @@ export default function Home() {
     const loadNFTs = async () => {
       try {
         const fetchedNFTs = await fetchNFTs(
-          account || "0xf989750817ed768e1431e19507f9d7358b8f196d"
+          account || (process.env.DEFAULT_WALLET_ID as string)
         );
         setNFTs(fetchedNFTs);
         setLoading(false);
