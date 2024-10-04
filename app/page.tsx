@@ -1,4 +1,5 @@
 "use client";
+const DEFAULT_WALLET_ID = process.env.NEXT_PUBLIC_DEFAULT_WALLET_ID;
 
 import { useEffect, useState } from "react";
 
@@ -14,10 +15,11 @@ export default function Home() {
   const { account } = useWallet();
 
   useEffect(() => {
+    console.log(process.env.DEFAULT_WALLET_ID);
     const loadNFTs = async () => {
       try {
         const fetchedNFTs = await fetchNFTs(
-          account || (process.env.DEFAULT_WALLET_ID as string)
+          account || (DEFAULT_WALLET_ID as string)
         );
         setNFTs(fetchedNFTs);
         setLoading(false);
