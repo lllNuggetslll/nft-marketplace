@@ -6,16 +6,18 @@ import { NFT } from "./../types/nftTypes";
 import NFTCard from "../components/NFTCard";
 import { fetchNFTs } from "../utils/nftAPI";
 import styled from "styled-components";
+import { useWallet } from "../context/WalletContext";
 
 export default function Home() {
   const [nfts, setNFTs] = useState<NFT[]>([]);
   const [loading, setLoading] = useState(true);
+  const { account } = useWallet();
 
   useEffect(() => {
     const loadNFTs = async () => {
       try {
         const fetchedNFTs = await fetchNFTs(
-          "0xf989750817ed768e1431e19507f9d7358b8f196d"
+          account || "0xf989750817ed768e1431e19507f9d7358b8f196d"
         );
         setNFTs(fetchedNFTs);
         setLoading(false);
@@ -26,7 +28,7 @@ export default function Home() {
     };
 
     loadNFTs();
-  }, []);
+  }, [account]);
 
   if (loading) return <p>Loading NFTs...</p>;
 
