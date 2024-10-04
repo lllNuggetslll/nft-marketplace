@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styled from "styled-components";
 
 interface NFTProps {
@@ -11,11 +12,13 @@ interface NFTProps {
 
 const NFTCard = ({ nft }: NFTProps) => {
   return (
-    <Card>
-      <Image src={nft.imageUrl} alt={nft.title} />
-      <Title>{nft.title}</Title>
-      <Owner>Owned by {nft.owner}</Owner>
-    </Card>
+    <Link href={`/nft/${nft.id}`} passHref>
+      <Card>
+        <Image src={nft.imageUrl} alt={nft.title} />
+        <Title>{nft.title}</Title>
+        <Owner>Owned by {nft.owner}</Owner>
+      </Card>
+    </Link>
   );
 };
 
@@ -26,6 +29,7 @@ const Card = styled.div`
   background-color: #fff;
   text-align: center;
   transition: box-shadow 0.3s;
+  cursor: pointer;
 
   &:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);

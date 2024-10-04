@@ -1,6 +1,6 @@
 "use client";
 
-import { ethers } from "ethers";
+import { Web3Provider } from "@ethersproject/providers";
 import styled from "styled-components";
 import { useState } from "react";
 
@@ -10,7 +10,7 @@ const WalletButton = () => {
   const connectWallet = async () => {
     if (window.ethereum) {
       try {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const provider = new Web3Provider(window.ethereum);
         const accounts = await provider.send("eth_requestAccounts", []);
         setAccount(accounts[0]);
       } catch (err) {
